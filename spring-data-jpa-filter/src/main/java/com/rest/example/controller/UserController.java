@@ -46,6 +46,16 @@ public class UserController {
 		return mapping;
 	}
 	
+	@GetMapping("/useraddress")
+	public MappingJacksonValue filter2() {
+		UserModel[] response = userService.getAllUsers();
+		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("address");
+		FilterProvider filters = new SimpleFilterProvider().addFilter("UserDetails", filter);
+		MappingJacksonValue mapping = new MappingJacksonValue(response);
+		mapping.setFilters(filters);
+		return mapping;
+	}
+	
 		
 }
 
